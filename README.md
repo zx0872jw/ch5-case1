@@ -1,53 +1,84 @@
-# ch5-case1
+# ch6-case1
 # drew and miranda
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace GreenvilleRevenueGUI
+using static System.Console;
+namespace GreenvilleRevenue
 {
-    public partial class Form1 : Form
+    class Program
     {
-        public Form1()
+        static void Main(string[] args)
         {
-            InitializeComponent();
-        }
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            int ThisYear;
-            int LastYear;
-            int ThisYear_Rev;
-            ThisYear = Convert.ToInt32(this_year.Text);
-            LastYear = Convert.ToInt32(last_year.Text);
-            if (ThisYear >= 0 && ThisYear <= 30 && LastYear >= 0 && LastYear <= 30)
+            string ThisYear;
+            int This_Number1;
+            string LastYear;
+            int This_Number2;
+            int fee;
+            int total_revenue;
+            string inputString = "";
+            int totalContest = 0;
+            int dance = 0;
+            int sing = 0;
+            int musical = 0;
+            int other = 0;
+            int number;
+            string letter;
+            
+            Write("The amount of contestants in last years competition: ");
+            LastYear = ReadLine();
+            Write("The amount of contestants in this years competition: ");
+            ThisYear = ReadLine();
+            fee = 25;
+            This_Number1 = Convert.ToInt16(ThisYear);
+            This_Number2 = Convert.ToInt16(LastYear);
+            total_revenue = fee * This_Number1;
+            
+            while (totalContest < This_Number1)
             {
-                ThisYear_Rev = ThisYear * 25;
-                this_label.Text = "This years contestants total: " + ThisYear;
-                last_label.Text = "Last years contestants total: " + LastYear;
-                rev_label.Text = "This years revenue is $" + ThisYear_Rev;
-                if (ThisYear >= (LastYear * 2))
+                Write("How many contestants: ");
+                number = Convert.ToInt32(ReadLine());
+                Write("Dance, Sing, Musical, or Other: ");
+                letter = Convert.ToString(ReadLine());
+                if (letter == "d" || letter == "D")
                 {
-                    contest_label.Text = "The competition is more than twice as big this year!";
+                    dance += number;
+                    totalContest += number;
+                    number = 0;
                 }
-                else if (ThisYear > LastYear && ThisYear < (LastYear * 2))
+                else if (letter == "s" || letter == "S")
                 {
-                    contest_label.Text = "The competition is bigger than ever!";
+                    sing += number;
+                    totalContest += number;
+                    number = 0;
                 }
-                else
+                else if (letter == "m" || letter == "M")
                 {
-                    contest_label.Text = "A tighter race this year! Come out and cast your vote!";
+                    musical += number;
+                    totalContest += number;
+                    number = 0;
+
+                }
+                else if (letter == "o" || letter == "O")
+                {
+                    other += number;
+                    totalContest += number;
+                    number = 0;
                 }
             }
+            WriteLine("number of contestants for dance: {0}", dance);
+            WriteLine("number of contestants for singing: {0}", sing);
+            WriteLine("number of contestants for musical: {0}", musical);
+            WriteLine("number of contestants for other: {0}", other);
+            if (This_Number1 > This_Number2)
+                {
+                WriteLine("This year has more contestants than last year.");
+                }
             else
-            {
-                contest_label.Text = "Please enter a valid value";
+                {
+                WriteLine("Last year had more contestants than this year.");
             }
         }
     }
